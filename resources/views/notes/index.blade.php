@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    <div class="container mt-4">
     <h1>All Notes</h1>
     <a href="{{ route('notes.create') }}" class="btn btn-primary mb-3">Add Note</a>
     @if (session('success'))
@@ -49,4 +50,5 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 @endsection
