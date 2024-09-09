@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreNoteRequest;
 class NoteController extends Controller
 {
     /**
@@ -28,15 +28,9 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNoteRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        
-        Note::create($request->all());
-   
+        Note::create($request -> validated());
         return redirect()->route('notes.index')
                          ->with('success','Note created successfully.');
     }
@@ -60,14 +54,9 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-      
-        $note->update($request->all());
+    public function update(StoreNoteRequest $request, Note $note)
+    { 
+        $note->update($request->validated());
        
         return redirect()->route('notes.index')
                          ->with('success', 'Note updated successfully');
