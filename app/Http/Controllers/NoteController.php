@@ -32,7 +32,7 @@ class NoteController extends Controller
     {
         Note::create($request -> validated());
         return redirect()->route('notes.index')
-                         ->with('success','Note created successfully.');
+                         ->with('success',' Your note created successfully.');
     }
 
     /**
