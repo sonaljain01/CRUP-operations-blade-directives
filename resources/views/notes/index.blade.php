@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-    <div class="container mt-4">
     <h1>All Notes</h1>
     <a href="{{ route('notes.create') }}" class="btn btn-primary mb-3">Add Note</a>
     @if (session('success'))
@@ -15,17 +14,21 @@
                 <th>S.No</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Email</th>
                 <th>Status</th>
                 <th>Actions</th>
+           
             </tr>
         </thead>
         <tbody>
-            @foreach($notes as $note)
+            @forelse($notes as $note)
                 <tr>
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $note->title }}</td>
                     <td>{{ $note->description }}</td>
-                    <td>{{ $note->status ? 'Active' : 'Inactive' }}</td>
+                    <td>{{ $note->email }}</td>
+                    
+
                     <td>
                         @switch($note->status)
                             @case('completed')
@@ -34,7 +37,8 @@
                             @case('pending')
                                 <span class="badge badge-warning">Pending</span>
                             @break
-                            
+                            @default
+                                <span class="badge badge-secondary">Unknown</span>
                         @endswitch
                     </td>
 
@@ -47,8 +51,11 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">No notes found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
-    </div>
 @endsection

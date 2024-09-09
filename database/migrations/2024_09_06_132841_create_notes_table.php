@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Completed');
+            $table->string('email')->unique()->default('example@example.com');
             $table->timestamps();
         });
     }
